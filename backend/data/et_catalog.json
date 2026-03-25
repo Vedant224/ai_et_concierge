@@ -1,0 +1,68 @@
+{
+  "products": [
+    {
+      "id": "et-001",
+      "name": "Equity Growth Fund",
+      "description": "A diversified equity fund focused on long-term capital appreciation through exposure to domestic and international stocks.",
+      "target_audience": ["Young professionals", "Long-term investors"],
+      "categories": ["Equity", "Growth", "Diversified"],
+      "core_benefit": "Long-term wealth creation through equity market participation"
+    },
+    {
+      "id": "et-002",
+      "name": "Fixed Income Plus",
+      "description": "A balanced fixed income strategy combining government and corporate bonds for steady income generation.",
+      "target_audience": ["Conservative investors", "Retirees", "Income seekers"],
+      "categories": ["Fixed Income", "Bonds", "Conservative"],
+      "core_benefit": "Stable income generation with lower volatility"
+    },
+    {
+      "id": "et-003",
+      "name": "Tech Innovation Portfolio",
+      "description": "Focused exposure to emerging technology companies and digital transformation leaders.",
+      "target_audience": ["Tech-savvy investors", "Growth seekers", "Young professionals"],
+      "categories": ["Technology", "Growth", "Innovation"],
+      "core_benefit": "Exposure to high-growth technology sector"
+    },
+    {
+      "id": "et-004",
+      "name": "Dividend Champion Fund",
+      "description": "Invests in companies with strong dividend histories and consistent dividend growth.",
+      "target_audience": ["Income investors", "Retirees", "Conservative investors"],
+      "categories": ["Dividends", "Income", "Conservative"],
+      "core_benefit": "Regular dividend income with capital appreciation potential"
+    },
+    {
+      "id": "et-005",
+      "name": "Sustainable Investing ETF",
+      "description": "Focuses on companies with strong environmental, social, and governance practices.",
+      "target_audience": ["ESG-conscious investors", "Socially responsible investors"],
+      "categories": ["ESG", "Sustainable", "Diversified"],
+      "core_benefit": "Align investments with personal values while maintaining returns"
+    },
+    {
+      "id": "et-006",
+      "name": "Emerging Markets Fund",
+      "description": "Provides exposure to high-growth emerging market economies and companies.",
+      "target_audience": ["Growth investors", "International exposure seekers"],
+      "categories": ["Emerging Markets", "Growth", "International"],
+      "core_benefit": "Access to high-growth emerging economies"
+    },
+    {
+      "id": "et-007",
+      "name": "Real Estate Investment Trust",
+      "description": "Provides indirect real estate exposure through professionally managed property portfolios.",
+      "target_audience": ["Diversification seekers", "Real estate interested investors"],
+      "categories": ["Real Estate", "Income", "Alternative"],
+      "core_benefit": "Real estate exposure without direct property ownership"
+    },
+    {
+      "id": "et-008",
+      "name": "Global Bond Fund",
+      "description": "Diversified global fixed income exposure across developed and emerging market bonds.",
+      "target_audience": ["International investors", "Conservative investors"],
+      "categories": ["Fixed Income", "International", "Conservative"],
+      "core_benefit": "Global yield opportunities with currency diversification"
+    }
+  ]
+}
