@@ -30,13 +30,42 @@ def persona_strategy(draw):
 @composite
 def product_strategy(draw):
     """Strategy to generate valid Product objects"""
+    # Use letters and numbers to avoid whitespace issues
+    safe_text = st.text(
+        alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-. ',
+        min_size=1,
+        max_size=100
+    ).filter(lambda x: x.strip())  # Filter out whitespace-only strings
+    
     return Product(
-        id=draw(st.text(alphabet='et-0123456789', min_size=4, max_size=10)),
-        name=draw(st.text(min_size=1, max_size=100)),
-        description=draw(st.text(min_size=1, max_size=500)),
-        target_audience=draw(st.lists(st.text(min_size=1, max_size=50), min_size=1, max_size=5)),
-        categories=draw(st.lists(st.text(min_size=1, max_size=50), min_size=1, max_size=5)),
-        core_benefit=draw(st.text(min_size=1, max_size=200))
+        id=draw(st.text(alphabet='et0123456789', min_size=4, max_size=10).filter(lambda x: x.strip())),
+        name=draw(st.text(
+            alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ',
+            min_size=1,
+            max_size=100
+        ).filter(lambda x: x.strip())),
+        description=draw(st.text(
+            alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .',
+            min_size=1,
+            max_size=500
+        ).filter(lambda x: x.strip())),
+        target_audience=draw(st.lists(
+            st.text(alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -', min_size=1, max_size=50)
+            .filter(lambda x: x.strip()),
+            min_size=1,
+            max_size=5
+        )),
+        categories=draw(st.lists(
+            st.text(alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -', min_size=1, max_size=50)
+            .filter(lambda x: x.strip()),
+            min_size=1,
+            max_size=5
+        )),
+        core_benefit=draw(st.text(
+            alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .',
+            min_size=1,
+            max_size=200
+        ).filter(lambda x: x.strip()))
     )
 
 

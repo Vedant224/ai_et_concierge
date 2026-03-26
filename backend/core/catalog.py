@@ -45,13 +45,13 @@ class CatalogLoader:
             )
 
         try:
-            with open(self.catalog_path, 'r') as f:
+            with open(self.catalog_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
         except json.JSONDecodeError as e:
             raise json.JSONDecodeError(
-                f"Invalid JSON in catalog file: {str(e)}", 
-                e.doc, 
-                e.pos
+                f"Invalid JSON in catalog file: {str(e)}",
+                e.doc,
+                e.pos,
             )
 
         if not isinstance(data, dict) or 'products' not in data:
@@ -84,35 +84,26 @@ class CatalogLoader:
         Raises:
             ValueError: If required fields are missing or invalid
         """
-        required_fields = ['id', 'name', 'description', 'target_audience', 
-                          'categories', 'core_benefit']
-        
-        missing_fields = [field for field in required_fields 
-                         if field not in product_data]
-        
-        if missing_fields:
-            raise ValueError(
-                f"Product missing required fields: {', '.join(missing_fields)}"
-            )
+        normalized = dict(product_data)
+        if "id" not in normalized and normalized.get("product_id"):
+            normalized["id"] = normalized["product_id"]
+        if "name" not in normalized and normalized.get("product_name"):
+            normalized["name"] = normalized["product_name"]
+        if "categories" not in normalized and normalized.get("includes"):
+            normalized["categories"] = normalized["includes"]
+        if "description" not in normalized and normalized.get("core_benefit"):
+            normalized["description"] = normalized["core_benefit"]
 
-        # Validate field types
-        if not isinstance(product_data.get('id'), str):
-            raise ValueError("'id' must be a string")
-        
-        if not isinstance(product_data.get('name'), str):
-            raise ValueError("'name' must be a string")
-        
-        if not isinstance(product_data.get('description'), str):
-            raise ValueError("'description' must be a string")
-        
-        if not isinstance(product_data.get('target_audience'), list):
-            raise ValueError("'target_audience' must be a list")
-        
-        if not isinstance(product_data.get('categories'), list):
-            raise ValueError("'categories' must be a list")
-        
-        if not isinstance(product_data.get('core_benefit'), str):
-            raise ValueError("'core_benefit' must be a string")
+        required_fields = ["id", "name", "description", "target_audience", "categories", "core_benefit"]
+        missing_fields = [field for field in required_fields if field not in normalized]
+        if missing_fields:
+            raise ValueError(f"Product missing required fields: {', '.join(missing_fields)}")
+
+        # Delegate detailed schema/type validation to the Product model
+        try:
+            Product(**normalized)
+        except Exception as exc:
+            raise ValueError(f"Product validation failed: {str(exc)}") from exc
 
         return True
 
