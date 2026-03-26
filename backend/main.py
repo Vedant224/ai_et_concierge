@@ -97,6 +97,14 @@ def _find_available_port(host: str, preferred_port: int, max_attempts: int = 20)
     )
 
 
+def _run_server(host: str, port: int, reload: bool) -> None:
+    # Let uvicorn manage signal handling so Ctrl+C prints normal shutdown logs.
+    try:
+        uvicorn.run("api.main:app", host=host, port=port, reload=reload)
+    except KeyboardInterrupt:
+        pass
+
+
 def main() -> None:
     _relaunch_with_project_python_if_needed()
     args = _build_parser().parse_args()
@@ -105,7 +113,7 @@ def main() -> None:
     if selected_port != args.port:
         print(f"Port {args.port} is busy. Using port {selected_port} instead.")
 
-    uvicorn.run("api.main:app", host=args.host, port=selected_port, reload=args.reload)
+    _run_server(args.host, selected_port, args.reload)
 
 
 if __name__ == "__main__":
