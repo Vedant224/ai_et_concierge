@@ -168,6 +168,8 @@ class ConversationOrchestrator:
         return (
             "You are preparing final recommendations for an ET ecosystem concierge.\n"
             f"Known user persona: {persona_context}.\n"
+            "Focus primarily on the user's strongest stated intent and preferences.\n"
+            "If you mention alternatives, keep them to one short line.\n"
             "Write a concise, conversational recommendation section that:\n"
             "1) explicitly names each recommended product,\n"
             "2) explains why each recommendation fits the persona,\n"
@@ -366,6 +368,10 @@ class ConversationOrchestrator:
     User intent may include learning/career growth, market tracking, wealth planning, enterprise insights, or lifestyle content.
 
     Important behavior rules:
+    - Prioritize the user's most recent and strongest stated intent above everything else.
+    - Keep the main answer focused on that intent in 2-4 lines before any extras.
+    - If mentioning other ET offerings, add at most one short secondary suggestion.
+    - If user asks for markets/stocks, keep focus on markets first and avoid long lifestyle detours.
     - If the user asks for learning, courses, AI development, career transition, or masterclasses, prioritize ET Masterclass and career-oriented guidance.
     - Do not force investment-first questions when the user intent is clearly learning/career oriented.
     - Ask one focused follow-up question at a time and keep responses concise, friendly, and practical.
